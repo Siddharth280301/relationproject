@@ -1,0 +1,43 @@
+{% load static %}
+<html>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <h3>Following are two tables : (* means PRIMARY KEY)</h3>
+    <p>Restaurant : </p>
+    <table>
+        <tr>
+            <th>Restaurant ID*</th>
+            <th>Restaurant Name</th>
+            <th>Restaurant Location</th>
+        </tr>
+        {% for restaurant in restaurants %}
+        <tr>
+            <td>{{restaurant.id}}</td>
+            <td>{{restaurant.restaurant_name}}</td>
+            <td>{{restaurant.location}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Employee :</p>
+    <table>
+        <tr>
+            <th>Employee ID*</th>
+            <th>Employee Name</th>
+            <th>Employee Contact</th>
+            <th>Restaurant ID</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{emp.id}}</td>
+            <td>{{emp.emp_name}}</td>
+            <td>{{emp.contact_no}}</td>
+            <td>{{emp.emp_restaurant.id}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Here Restaurant ID refers to parent Restaurant table (Many to One Relationship)</p><br>
+    <p>Enter employee ID to display results -</p>
+    <form method="GET" action="results">
+        <input type="number" name="employee_id">
+        <input type="submit">
+    </form>
+</html>
